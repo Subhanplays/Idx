@@ -67,6 +67,16 @@ echo -e "\033[1;32m✓ dev.nix file created successfully in .idx directory\033[0
 # Return to original directory
 cd ..
 
-# Run the vm.sh script
-echo -e "\033[1;35mStarting VM setup...\033[0m"
-bash <(curl -fsSL https://raw.githubusercontent.com/hopingboyz/vms/main/vm.sh)
+# Ask for user confirmation
+echo ""
+echo -e "\033[1;33mDevelopment environment setup completed!\033[0m"
+echo -e "\033[1;37mDo you want to proceed with VM setup? (yes/no): \033[0m"
+read -r response
+
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
+    echo -e "\033[1;35mStarting VM setup...\033[0m"
+    bash <(curl -fsSL https://raw.githubusercontent.com/hopingboyz/vms/main/vm.sh)
+else
+    echo -e "\033[1;31mVM setup cancelled. You can run it later with:\033[0m"
+    echo -e "\033[1;37mbash <(curl -fsSL https://raw.githubusercontent.com/hopingboyz/vms/main/vm.sh)\033[0m"
+fi
